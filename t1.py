@@ -20,7 +20,8 @@ class Example(QWidget):
         font = QtGui.QFont("Dodger Condensed Italic", 100, 1)
         self.speedLbl.setAutoFillBackground(True)
         p = self.speedLbl.palette()
-        p.setColor(self.speedLbl.backgroundRole(), QColor(0x000000))
+        p.setColor(self.speedLbl.backgroundRole(), QColor(0x202020).darker())
+        p.setColor(self.speedLbl.foregroundRole(), QColor(0xFFFFFF))
         self.speedLbl.setPalette(p)
         self.speedLbl.setFont(font)
         
