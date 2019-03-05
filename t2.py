@@ -9,36 +9,37 @@ from PyQt5.QtWebKitWidgets import *
 
 
 class Example(QWidget):
-    
+
     def __init__(self):
         super().__init__()
-        
         self.initUI()
-        
+
+    def setColor(self, layout):
+        layout.setAutoFillBackground(True)
+        p = layout.palette()
+        p.setColor(layout.backgroundRole(), QColor(0x202020).darker())
+        p.setColor(layout.foregroundRole(), QColor(0xFFFFFF))
+        layout.setPalette(p)
+
     def addSpeedometer(self, layout):
-        self.speedLbl = QLabel('75', self)    
+        self.speedLbl = QLabel('75', self)
         font = QtGui.QFont("Dodger Condensed Italic", 100, 1)
-        self.speedLbl.setAutoFillBackground(True)
-        p = self.speedLbl.palette()
-        p.setColor(self.speedLbl.backgroundRole(), QColor(0x202020).darker())
-        p.setColor(self.speedLbl.foregroundRole(), QColor(0xFFFFFF))
-        self.speedLbl.setPalette(p)
+        self.setColor(self.speedLbl)
         self.speedLbl.setFont(font)
-        
         layout.addWidget(self.speedLbl)
 
     def addCloseBtn(self, layout):
         closeBtn = QPushButton("close")
         layout.addWidget(closeBtn)
         closeBtn.pressed.connect(lambda: self.closeBtnAction())
-        
+
     def setupMainGrid(self):
         mainGridLayout = QVBoxLayout()
         mainGridLayout.setSpacing(0)
         return mainGridLayout
 
     def setupTopBoxLayout(self, layout):
-        thbl = QHBoxLayout() 
+        thbl = QHBoxLayout()
         layout.addLayout(thbl, 2)
         self.addSpeedometer(thbl)
         self.setupGA(thbl)
@@ -55,28 +56,28 @@ class Example(QWidget):
 
     def setupGA(self, layout):
         micBtn = QPushButton()
-        micBtn.setIcon(QtGui.QIcon("./images/148766.png"))
+        micBtn.setIcon(QtGui.QIcon("./images/mic2.png"))
         micBtn.setIconSize(QtCore.QSize(140,140))
-        layout.addWidget(micBtn) 
+        self.setColor(micBtn)
+        layout.addWidget(micBtn)
 
     def initUI(self):
         mainGridLayout = self.setupMainGrid()
         topHBoxView = self.setupTopBoxLayout(mainGridLayout)
         mapView = self.setupMapView(mainGridLayout)
         mainGridLayout.setContentsMargins(0,0,0,0)
-        self.setLayout(mainGridLayout)        
-        
-        self.setWindowTitle('Absolute')    
+        self.setLayout(mainGridLayout)
+
+        self.setWindowTitle('Absolute')
         self.showFullScreen()
-        
+
 #Actions
     def closeBtnAction(self):
         self.close()
-        
+
 if __name__ == '__main__':
-    
+
     app = QApplication(sys.argv)
     QtGui.QFontDatabase.addApplicationFont('/home/pi/samurai/sam/font/Dodgv2ci.ttf')
     ex = Example()
     sys.exit(app.exec_())
-
