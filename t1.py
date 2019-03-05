@@ -20,7 +20,7 @@ class Example(QWidget):
         font = QtGui.QFont("Dodger Condensed Italic", 100, 1)
         self.speedLbl.setAutoFillBackground(True)
         p = self.speedLbl.palette()
-        p.setColor(self.speedLbl.backgroundRole(), Qt.red)
+        p.setColor(self.speedLbl.backgroundRole(), QColor(0x000000))
         self.speedLbl.setPalette(p)
         self.speedLbl.setFont(font)
         
@@ -68,7 +68,7 @@ class Example(QWidget):
 if __name__ == '__main__':
     
     app = QApplication(sys.argv)
-    QtGui.QFontDatabase.addApplicationFont('/home/pi/samurai/font/Dodgv2ci.ttf')
+    QtGui.QFontDatabase.addApplicationFont('/home/pi/samurai/sam/font/Dodgv2ci.ttf')
     ex = Example()
     sys.exit(app.exec_())
 
