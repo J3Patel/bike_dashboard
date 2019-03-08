@@ -45,7 +45,7 @@ class Example(QWidget):
         self.addSpeedometer(thbl)
         self.addTripMeter(thbl)
         # self.setupIndicatorView(thbl)
-        self.setupGA(thbl)
+        # self.setupGA(thbl)
         self.setupGA(thbl)
         thbl.setSpacing(0)
         return thbl
@@ -64,22 +64,42 @@ class Example(QWidget):
         indicatorV = self.setupIndicatorView(vbox)
 
         self.totalLb = QLabel('10000', self)
-        self.totalLb.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        self.totalLb.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter)
         self.setColor(self.totalLb)
         self.setDigitalFont(self.totalLb, 20)
         vbox.addWidget(self.totalLb, 1)
 
-        tripLabel = QLabel('TRIP', self)
-        tripLabel.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignBottom )
+        tlb = QHBoxLayout()
+        vbox.addLayout(tlb, 1)
+        tlb.setSpacing(1)
+
+        tripLabel = QLabel('T 1', self)
+        tripLabel.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignBottom )
         self.setColor(tripLabel)
         self.setFont(tripLabel, 12)
-        vbox.addWidget(tripLabel, 1)
+        tlb.addWidget(tripLabel, 1)
 
-        self.tripLbl = QLabel('350', self)
-        self.tripLbl.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter )
-        self.setColor(self.tripLbl)
-        self.setDigitalFont(self.tripLbl, 20)
-        vbox.addWidget(self.tripLbl, 1)
+        trip2Label = QLabel('T 2', self)
+        trip2Label.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignBottom )
+        self.setColor(trip2Label)
+        self.setFont(trip2Label, 12)
+        tlb.addWidget(trip2Label, 1)
+
+        tlvb = QHBoxLayout()
+        vbox.addLayout(tlvb, 1)
+        tlvb.setSpacing(1)
+
+        self.tripLbl1 = QLabel('350', self)
+        self.tripLbl1.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter )
+        self.setColor(self.tripLbl1)
+        self.setDigitalFont(self.tripLbl1, 20)
+        tlvb.addWidget(self.tripLbl1, 1)
+
+        self.tripLbl2 = QLabel('400', self)
+        self.tripLbl2.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter )
+        self.setColor(self.tripLbl2)
+        self.setDigitalFont(self.tripLbl2, 20)
+        tlvb.addWidget(self.tripLbl2, 1)
 
     def setupIndicatorView(self, layout):
 
@@ -87,21 +107,21 @@ class Example(QWidget):
 
         lIB = QPushButton()
         lIB.setFlat(True)
-        lIB.setIcon(QtGui.QIcon("./images/left_on.png"))
+        lIB.setIcon(QtGui.QIcon("./images/left_off.png"))
         lIB.setIconSize(QtCore.QSize(40,40))
         self.setColor(lIB)
         iv.addWidget(lIB, 1)
 
         nIB = QPushButton()
         nIB.setFlat(True)
-        nIB.setIcon(QtGui.QIcon("./images/neutral_on.png"))
+        nIB.setIcon(QtGui.QIcon("./images/neutral_off.png"))
         nIB.setIconSize(QtCore.QSize(40,40))
         self.setColor(nIB)
         iv.addWidget(nIB, 1)
 
         rIB = QPushButton()
         rIB.setFlat(True)
-        rIB.setIcon(QtGui.QIcon("./images/right_on.png"))
+        rIB.setIcon(QtGui.QIcon("./images/right_off.png"))
         rIB.setIconSize(QtCore.QSize(40,40))
         self.setColor(rIB)
         iv.addWidget(rIB, 1)
