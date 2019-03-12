@@ -70,7 +70,7 @@ class Example(QWidget):
         vbox.addWidget(self.totalLb, 1)
 
         tlb = QHBoxLayout()
-        vbox.addLayout(tlb, 1)
+        vbox.addLayout(tlb, 0.7)
         tlb.setSpacing(1)
 
         tripLabel = QLabel('T 1', self)
@@ -89,44 +89,60 @@ class Example(QWidget):
         vbox.addLayout(tlvb, 1)
         tlvb.setSpacing(1)
 
-        self.tripLbl1 = QLabel('350', self)
+        self.tripLbl1 = QLabel('50', self)
         self.tripLbl1.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter )
         self.setColor(self.tripLbl1)
         self.setDigitalFont(self.tripLbl1, 20)
         tlvb.addWidget(self.tripLbl1, 1)
 
-        self.tripLbl2 = QLabel('400', self)
+        self.tripLbl2 = QLabel('4800', self)
         self.tripLbl2.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter )
         self.setColor(self.tripLbl2)
         self.setDigitalFont(self.tripLbl2, 20)
         tlvb.addWidget(self.tripLbl2, 1)
 
+    def startIndicator(self, dir):
+        switcher = {
+            1: startRIndicator,
+            2: startLIndicator,
+            3: startNIndicator
+        }
+        func = switcher.get(dir, lambda: "invalid case")
+        func()
+    def startRIndicator(self):
+        print("started right")
+
+    def startLIndicator(self):
+        print("started left")
+
+    def startNIndicator(self):
+        print("started Neutral")
+
     def setupIndicatorView(self, layout):
-
         iv = QHBoxLayout()
-
+        isize = 50
         lIB = QPushButton()
         lIB.setFlat(True)
         lIB.setIcon(QtGui.QIcon("./images/left_off.png"))
-        lIB.setIconSize(QtCore.QSize(40,40))
+        lIB.setIconSize(QtCore.QSize(isize,isize))
         self.setColor(lIB)
         iv.addWidget(lIB, 1)
 
         nIB = QPushButton()
         nIB.setFlat(True)
         nIB.setIcon(QtGui.QIcon("./images/neutral_off.png"))
-        nIB.setIconSize(QtCore.QSize(40,40))
+        nIB.setIconSize(QtCore.QSize(isize,isize))
         self.setColor(nIB)
         iv.addWidget(nIB, 1)
 
         rIB = QPushButton()
         rIB.setFlat(True)
         rIB.setIcon(QtGui.QIcon("./images/right_off.png"))
-        rIB.setIconSize(QtCore.QSize(40,40))
+        rIB.setIconSize(QtCore.QSize(isize,isize))
         self.setColor(rIB)
         iv.addWidget(rIB, 1)
 
-        layout.addLayout(iv, 2)
+        layout.addLayout(iv, 3)
 
     def setupGA(self, layout):
         micBtn = QPushButton()
